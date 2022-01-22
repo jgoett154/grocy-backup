@@ -48,8 +48,22 @@ func Backup(ctx *cli.Context) error {
 		backupData[entity] = data
 	}
 
+	// Get filename or empty string if none given
+	var fileName = ctx.Args().First()
+	var fileNameInfo, _ = os.Stat(fileName)
+
+	// Check if filename given is a directory
+	// If it is, create a backup file in directory
+	if fileNameInfo != nil && fileNameInfo.IsDir() {
+		fileName = fmt.Sprintf("%s/backup-%s.json", fileName, time.Now().Format(time.RFC3339))
+	}
+
+	// If no file or directory given, default to putting a file in current directory
+	if fileName == "" {
+		fileName = fmt.Sprintf("backup-%s.json", time.Now().Format(time.RFC3339))
+	}
+
 	// Open file for writing
-	fileName := fmt.Sprintf("backup-%s.json", time.Now().Format(time.RFC3339))
 	outFile, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE, os.ModePerm)
 	if err != nil {
 		return err

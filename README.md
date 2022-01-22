@@ -17,16 +17,22 @@ Both commands require 2 flags to be passed.
 
 ### Backup
 Backup does exactly what it sounds like, it sends requests to your Grocy server to download the data and store it in a file for use later.
-Backup does not require any additional arguments or flags aside from `--server` and `--api-key`.
+
+Backup optionally can accept a file name or directory in addition to `--server` and `--api-key`. Please note if using directory that it should be created ahead of time.
 
 ### Restore
 Restore takes a previous backup file and sends requests to your Grocy server in order to create any missing entries.
+
 Restore requires the name of the file to be passed to it in addition to `--server` and `--api-key`.
 
 ## Examples
 `grocy-backup --server "http://localhost" --api-key "123456789" backup`
 
 `grocy-backup --server "http://localhost/api" --api-key "123456789" backup`
+
+`grocy-backup --server "http://localhost" --api-key "123456789" backup "backupfile.json"`
+
+`grocy-backup --server "http://localhost" --api-key "123456789" backup "backups/"`
 
 `grocy-backup --server "http://localhost/" --api-key "123456789" restore "backupfile.json"`
 
