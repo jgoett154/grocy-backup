@@ -12,6 +12,7 @@ Currently the utility has 2 commands, backup and restore.
 Both commands require 2 flags to be passed.
 
 `--server` defines the address of the Grocy server to connect to. It does not have to be the `/api` endpoint, the utility will handle that if not given.
+
 `--api-key` in order to connect to the Grocy server an API key will need to be created prior to doing any backup or restore functions.
 
 ### Backup
@@ -24,7 +25,9 @@ Restore requires the name of the file to be passed to it in addition to `--serve
 
 ## Examples
 `grocy-backup --server "http://localhost" --api-key "123456789" backup`
+
 `grocy-backup --server "http://localhost/api" --api-key "123456789" backup`
+
 `grocy-backup --server "http://localhost/" --api-key "123456789" restore "backupfile.json"`
 
 ## Additional Notes/TODO
